@@ -1,0 +1,234 @@
+/* about.css — fully standalone stylesheet for about.html.
+   Not shared with styles.css/cue.css on purpose, so this page can be
+   edited independently of the rest of the site. */
+
+:root{
+  --stage:#0B0B10;
+  --ink:#F4F1EA;
+  --muted:#8A8894;
+  --line: rgba(244,241,234,0.14);
+  --g1:#F2A93B;
+  --g2:#E8482C;
+  --g3:#3B8FE8;
+  --g4:#9B7CF2;
+  --g5:#8FBF4A;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{background:var(--stage); color:var(--ink); font-family:'Inter',sans-serif; overflow-x:hidden;}
+body{min-height:100vh;}
+::selection{background:var(--ink); color:var(--stage);}
+a{ color:inherit; }
+
+.grain{
+  position:fixed; inset:0; pointer-events:none; opacity:.05; z-index:50; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.floor{
+  position:fixed; inset:0; z-index:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity:.35;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent 75%);
+}
+
+/* NAVBAR (same look as the rest of the site, duplicated here on purpose) */
+.navbar{
+  position:relative; z-index:30;
+  display:flex; justify-content:space-between; align-items:center;
+  gap: 24px; padding: 20px 5vw;
+}
+.nav-curtain{
+  position:absolute; left:0; right:0; bottom:0; height:2px; transform:scaleX(0); transform-origin:left;
+  background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3), var(--g4), var(--g5));
+}
+.nav-left{ display:flex; align-items:center; gap:14px; }
+.logo-slot{
+  position:relative; width:40px; height:40px; border-radius:10px;
+  border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+  text-decoration:none; overflow:visible; flex-shrink:0;
+  background: rgba(244,241,234,.04);
+  transition: border-color .3s ease, background .3s ease;
+}
+.logo-slot:hover{ border-color: var(--ink); background: rgba(244,241,234,.08); }
+.logo-img{ width:100%; height:100%; object-fit:contain; display:block; border-radius:10px; }
+.logo-fallback{
+  display:none; align-items:center; justify-content:center; width:100%; height:100%;
+  font-family:'Fraunces', serif; font-weight:600; font-size:1rem; color:var(--ink);
+}
+.logo-ring{
+  position:absolute; inset:-5px; border-radius:14px; border:1px solid transparent;
+  background: conic-gradient(from 0deg, var(--g1), var(--g2), var(--g3), var(--g4), var(--g5), var(--g1)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity:0; transition: opacity .4s ease; animation: spin 4s linear infinite; pointer-events:none;
+}
+.logo-slot:hover .logo-ring{ opacity:1; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+.wordmark{ font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem; letter-spacing:.02em; white-space:nowrap; }
+
+.nav-links{
+  list-style:none; display:flex; gap:32px; align-items:center;
+  font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+}
+.nav-links a{
+  color:var(--muted); text-decoration:none; position:relative; padding-bottom:4px;
+  transition: color .3s ease;
+}
+.nav-links a::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--ink);
+  transform:scaleX(0); transform-origin:left; transition:transform .3s ease;
+}
+.nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+.nav-links a:hover::after, .nav-links a.active::after{ transform:scaleX(1); }
+
+.hamburger{
+  display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px;
+  width:38px; height:38px; border-radius:10px; border:1px solid var(--line); background:transparent;
+  cursor:pointer; flex-shrink:0; padding:0;
+}
+.hamburger span{ display:block; width:18px; height:1.5px; background:var(--ink); transition: transform .3s ease, opacity .3s ease; }
+.hamburger.active span:nth-child(1){ transform: translateY(6.5px) rotate(45deg); }
+.hamburger.active span:nth-child(2){ opacity:0; }
+.hamburger.active span:nth-child(3){ transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 900px){
+  .hamburger{ display:flex; position:relative; z-index:110; }
+  .nav-links{
+    position:fixed; inset:0; z-index:100;
+    flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    padding:0; margin:0;
+    background: rgba(6,6,9,.97);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition: opacity .4s ease, visibility .4s ease;
+  }
+  .nav-links.open{ opacity:1; visibility:visible; pointer-events:auto; }
+  .nav-links li{ list-style:none; overflow:hidden; }
+  .nav-links a{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding: 14px 36px; margin: 6px 0; border-radius: 14px;
+    background: rgba(244,241,234,.05); border: 1px solid var(--line);
+    font-family:'Fraunces', serif; font-size: clamp(1.3rem, 5vw, 1.7rem); font-weight:500;
+    letter-spacing:0; text-transform:none;
+    opacity:0; transform: translateY(28px);
+    transition: background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .nav-links a::after{ display:none; }
+  .nav-links a:hover{ color: var(--g1); background: rgba(242,169,59,.08); border-color: var(--g1); }
+  .nav-links li:nth-child(2) a:hover{ color: var(--g2); background: rgba(232,72,44,.08); border-color: var(--g2); }
+  .nav-links li:nth-child(3) a:hover{ color: var(--g3); background: rgba(59,143,232,.08); border-color: var(--g3); }
+  .nav-links li:nth-child(4) a:hover{ color: var(--g4); background: rgba(155,124,242,.08); border-color: var(--g4); }
+  .nav-links.open a{ animation: navLinkIn .6s cubic-bezier(.16,1,.3,1) forwards; }
+  .nav-links.open li:nth-child(1) a{ animation-delay:.08s; }
+  .nav-links.open li:nth-child(2) a{ animation-delay:.16s; }
+  .nav-links.open li:nth-child(3) a{ animation-delay:.24s; }
+  .nav-links.open li:nth-child(4) a{ animation-delay:.32s; }
+  @keyframes navLinkIn{ to{ opacity:1; transform:translateY(0); } }
+}
+body.menu-open{ overflow:hidden; }
+
+/* ABOUT CONTENT */
+.about-hero{
+  position:relative; z-index:5; padding: 7vh 5vw 0; max-width:820px; margin:0 auto; text-align:center;
+}
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--muted); display:block; margin-bottom:18px;
+}
+.about-hero h1{
+  font-family:'Fraunces', serif; font-weight:500; font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height:1.08; letter-spacing:-.01em;
+}
+
+/* animated logo reveal — the picture placeholder */
+.logo-stage{
+  position:relative; z-index:5; display:flex; justify-content:center;
+  padding: 7vh 5vw 4vh;
+}
+.logo-frame{
+  position:relative; width:190px; height:190px;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:scale(.82);
+}
+.logo-frame.in-view{
+  animation: logoIn 1s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes logoIn{ to{ opacity:1; transform:scale(1); } }
+
+.logo-glow{
+  position:absolute; inset:-46px; border-radius:50%;
+  background: radial-gradient(circle, rgba(242,169,59,.28), transparent 70%);
+  filter: blur(22px);
+  animation: glowPulse 4.5s ease-in-out infinite;
+}
+@keyframes glowPulse{
+  0%, 100%{ transform:scale(1); opacity:.65; }
+  50%{ transform:scale(1.18); opacity:1; }
+}
+
+.logo-ring-big{
+  position:absolute; inset:0; border-radius:50%; padding:3px;
+  background: conic-gradient(from 0deg, var(--g1), var(--g2), var(--g3), var(--g4), var(--g5), var(--g1)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: spinSlow 7s linear infinite;
+}
+@keyframes spinSlow{ to{ transform:rotate(360deg); } }
+
+.logo-photo{
+  position:relative; z-index:2; width:148px; height:148px; border-radius:50%; overflow:hidden;
+  background: var(--stage); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+}
+.logo-photo-img{ width:100%; height:100%; object-fit:contain; padding:26px; display:block; }
+.logo-photo-fallback{
+  display:none; align-items:center; justify-content:center; width:100%; height:100%;
+  font-family:'Fraunces', serif; font-weight:600; font-size:2.6rem; color:var(--ink);
+}
+
+.about-copy{
+  position:relative; z-index:5; max-width:640px; margin:0 auto; padding: 2vh 5vw 10vh; text-align:center;
+}
+.about-desc{
+  color: rgba(244,241,234,.85); font-size:1.08rem; line-height:1.8;
+}
+
+/* CONTACT FOOTER — duplicated here so this page has no dependency on styles.css */
+.site-footer{
+  position:relative; z-index:5;
+  display:flex; align-items:center; justify-content:center; gap:26px; flex-wrap:wrap;
+  padding: 28px 5vw 42px; border-top:1px solid var(--line);
+}
+.site-footer .footer-social{ display:flex; align-items:center; gap:14px; }
+.site-footer .footer-social a{
+  width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; color:var(--muted);
+  transition: color .3s ease, border-color .3s ease;
+}
+.site-footer .footer-social a:hover{ color:var(--ink); border-color:var(--ink); }
+.site-footer .footer-social svg{ width:15px; height:15px; }
+.site-footer .footer-email{
+  font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.06em;
+  color:var(--muted); text-decoration:none; border-bottom:1px solid transparent;
+  transition:color .3s ease, border-color .3s ease;
+}
+.site-footer .footer-email:hover{ color:var(--ink); border-color:var(--ink); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+  .logo-frame{ opacity:1; transform:none; }
+}
+
+/* Arabic support */
+html[lang="ar"] body,
+html[lang="ar"] .wordmark,
+html[lang="ar"] h1,
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .nav-links,
+html[lang="ar"] .about-desc,
+html[lang="ar"] footer{
+  font-family:'Cairo', sans-serif !important;
+}
