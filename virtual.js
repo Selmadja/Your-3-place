@@ -1,8 +1,4 @@
-/* virtual-events.js — fully standalone script for virtual-events.html.
-   Not shared with script.js/cue.js on purpose.
-   Builds a vertical, continuously-scrolling (top-to-bottom loop) stack of
-   event cards from window.VIRTUAL_EVENTS, same fields as the cue pages:
-   img, date (optional), location, title, buttonLabel/Href, socialIcon/Href. */
+
 
 const ICONS = {
   instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>',

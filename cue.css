@@ -1,6 +1,4 @@
-/* Styles specific to the cue-0X.html detail pages — the events carousel.
-   Loaded in addition to styles.css, which still supplies the base theme
-   (colors, fonts, navbar, hero). This file only owns the carousel. */
+
 
 .events{
   position:relative; z-index:5;

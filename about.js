@@ -1,9 +1,4 @@
-/* about.js — fully standalone script for about.html.
-   Not shared with script.js/cue.js on purpose. Handles two things:
-   1) the animated logo reveal (fires once, when it scrolls into view)
-   2) the mobile hamburger menu (same behavior as the rest of the site) */
 
-// 1) Animated logo reveal
 const logoFrame = document.getElementById('logo-frame');
 if (logoFrame) {
   const revealLogo = () => logoFrame.classList.add('in-view');

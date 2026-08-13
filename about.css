@@ -1,6 +1,4 @@
-/* about.css — fully standalone stylesheet for about.html.
-   Not shared with styles.css/cue.css on purpose, so this page can be
-   edited independently of the rest of the site. */
+
 
 :root{
   --stage:#0B0B10;

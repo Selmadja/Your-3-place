@@ -1,11 +1,4 @@
-/* Standalone script for the cue-0X.html pages: the events marquee +
-   the mobile hamburger menu. Independent from script.js (the homepage
-   slider) — no GSAP required.
 
-   Each cue page defines window.EVENTS before this script runs. Every
-   event object has an `img` field you can point at your own photo —
-   e.g. "img": "cue1-event1.jpg". Until a real file exists there, a
-   dashed placeholder shows instead (no broken-image icon). */
 
 const ICONS = {
   instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>',

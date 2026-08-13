@@ -1,5 +1,4 @@
-// img: path/URL to YOUR picture for this cue. Used for both the small card
-// thumbnail and the big stage background — one place to swap it everywhere.
+
 const DEFAULT_SLIDES = [
   { num:' 01', indexLabel:'First³ place', title:'EVENTS',      term:'Events', color:'var(--g1)', href:'cue-01.html', img:'cue-01.jpg',
     desc:'Discover exciting events and unforgettable experiences.Find concerts, festivals, and gatherings that match your interests.' },
