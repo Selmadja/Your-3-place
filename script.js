@@ -1,12 +1,12 @@
 
 const DEFAULT_SLIDES = [
-  { num:' 01', indexLabel:'First³ place', title:'EVENTS',      term:'Events', color:'var(--g1)', href:'cue-01.html', img:'cue-01.jpg',
+  { num:' 01', indexLabel:'First³ place', title:'EVENTS',      term:'Event', color:'var(--g1)', href:'cue-01.html', img:'cue-01.jpg',
     desc:'Discover exciting events and unforgettable experiences.Find concerts, festivals, and gatherings that match your interests.' },
   { num:'02', indexLabel:'Second³ place', title:'SPOTS', term:'Spot',     color:'var(--g2)', href:'cue-02.html', img:'cue-02.jpg',
     desc:'Explore amazing places and hidden gems waiting to be discovered. Find beautiful spots for adventures, relaxation, and memories.' },
-  { num:'03', indexLabel:'Third³ Place', title:'Exhibitions',     term:'Exhibition',      color:'var(--g3)', href:'cue-03.html', img:'cue-03.jpg',
+  { num:'03', indexLabel:'Third³ Place', title:'EXHIBITIONS',     term:'Exhibition',      color:'var(--g3)', href:'cue-03.html', img:'cue-03.jpg',
     desc:'Dive into creative worlds filled with art, culture, and inspiration. Discover exhibitions that spark curiosity and imagination.' },
-  { num:'04', indexLabel:'Fourth³ Place', title:'WORkSHOP',    term:'workshop',   color:'var(--g4)', href:'cue-04.html', img:'cue-04.jpg',
+  { num:'04', indexLabel:'Fourth³ Place', title:'WORKSHOP',    term:'workshop',   color:'var(--g4)', href:'cue-04.html', img:'cue-04.jpg',
     desc:'Learn, create, and grow through inspiring workshops. Join interactive sessions and develop new skills with experts.' },
   { num:'05', indexLabel:'Fifth³ Place', title:'CONTESTS',     term:'Contest',      color:'var(--g5)', href:'cue-05.html', img:'cue-05.jpg',
     desc:'Take part in exciting challenges and showcase your talents. Compete, create, and discover opportunities to stand out.' },
